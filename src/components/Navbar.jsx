@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import logo from '../assets/logo.png'
 import doctor from "../assets/doctor.png"
+import UserInputContext from './UserInputContext';
 
-const Navbar = (props) => {
+const Navbar = () => {
+  const { userInput, handleInputChange } = useContext(UserInputContext);
 
+  const handleChange = (event) => {
+    handleInputChange(event.target.value);
+  };
 
   return (
     <div className='flex justify-between p-3 px-6 bg-white'>
@@ -21,8 +26,8 @@ const Navbar = (props) => {
             />
           </svg>
           <input 
-          value={props.searchTerm}
-          onChange={(e) => props.setSearchTerm(e.target.value)}
+          value={userInput}
+          onChange={handleChange}
             type="text" 
             placeholder='Search by patients...'  
             className='ml-6 w-[300px] h-6 outline-none'

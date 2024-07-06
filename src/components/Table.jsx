@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import UserInputContext from './UserInputContext';
 
 
-const Table = (props) => {
+const Table = () => {
+  //useContext
+  const { userInput, handleInputChange } = useContext(UserInputContext);
+
+
+
   const [rawData, setRawData] = useState([]);
   const [expandedRows, setExpandedRows] = useState([]);
   const[error, setError] = useState()
@@ -12,7 +18,7 @@ const Table = (props) => {
 
 
   const data = rawData.filter((item )=> 
-    item.Name.toLowerCase().includes(props.searchTerm)
+    item.Name.toLowerCase().includes(userInput)
   )
 
   const handleRowClick = (index) => {
@@ -30,7 +36,6 @@ const Table = (props) => {
         const response = await axios.get(
           'http://3.88.1.181:8000/products/public/catalog?supplier=FragranceX&first=0&last=50&search=search'
         );
-        console.log(response.data);
         setRawData(response.data);
         setLoading(false);
       } catch (error) {
@@ -99,7 +104,7 @@ const Table = (props) => {
                     {item.Description}
               </motion.p>
                 </td>
-                <td className="px-6">{item.Brand}</td>
+                <td className="px-6 ">{item.Brand}</td>
                 <td className="px-6">{item["Cost Price"]}</td>
                 <td className="px-6">{item.Quantity}</td>
                 <td className="px-2">{item.size}</td>
