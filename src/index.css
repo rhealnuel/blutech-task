@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.slim-scrollbar::-webkit-scrollbar {
+    width: 6px; /* For WebKit browsers */
+   
+  
+  }
+  
+  .slim-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 100vw;
+  }
+  
+  .slim-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 100vw;
+    margin-block: .9em;
+  }
